@@ -1,0 +1,51 @@
+name: Sync iStoreOS Files
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sync]
+
+jobs:
+  build:
+    name: iStoreOS - [${{ matrix.target }}]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        target:
+          - aarch64_generic
+          - x86_64
+
+    steps:
+    - name: Checkout
+      continue-on-error: true
+      uses: actions/checkout@main
+      with:
+        ref: ${{ matrix.target }}
+
+    - name: Setup variables
+      run: |
+        sudo timedatectl set-timezone 'Asia/Shanghai'
+        git config --global user.email "2519840456@qq.com"
+        git config --global user.name "Xiaokailnol"
+
+    - name: Sync iStoreOS Files
+      run: |
+        if [ "${{ matrix.target }}" = "x86_64" ]; then
+          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
+          curl -L -o config.seed https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
+        elif [ "${{ matrix.target }}" = "aarch64_generic" ]; then
+          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/r4se/feeds.conf
+          curl -L -o config.seed https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
+        fi
+
+    - name: Git push
+      continue-on-error: true
+      run: |
+        Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
+        [ -d .git ] && git init
+        git add --all
+        git commit -sm "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
+        git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:${{ matrix.target }}
