@@ -12,10 +12,18 @@ rm -rf package/diy/luci-app-ota
 rm -rf feeds/packages/net/{xray-core,v2ray-core,v2ray-geodata,sing-box}
 
 # Go 26.x
-git clone --depth=1 -b 26.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone --depth=1 -b 26.x https://"$git_name":"$git_password"@gitea.kejizero.xyz/zhao/packages_lang_golang feeds/packages/lang/golang
+
+# 添加额外插件
+git clone --depth=1 -b v5 https://github.com/sbwml/luci-app-mosdns package/new/luci-app-mosdns
+git clone --depth=1 -b main https://github.com/sbwml/luci-app-openlist2 package/new/openlist
+git clone --depth=1 -b main https://github.com/sirpdboy/luci-app-adguardhome package/new/luci-app-adguardhome
 
 # 科学上网插件
-git clone --depth=1 -b v5 https://github.com/sbwml/openwrt_helloworld package/helloworld
+git clone --depth=1 -b master https://"$git_name":"$git_password"@gitea.kejizero.xyz/zhao/openwrt_helloworld package/new/openwrt_helloworld
+
+# 更改 Argon 主题背景
+cp -f $GITHUB_WORKSPACE/images/bg1.jpg feeds/third/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
 # 修复 Rust 错误
 sed -i 's/--set=llvm\.download-ci-llvm=true \\/--set=llvm.download-ci-llvm=false \\/' feeds/packages/lang/rust/Makefile
