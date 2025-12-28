@@ -110,7 +110,7 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRT_PATH
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF feeds.conf
+        cp -f "$GITHUB_WORKSPACE/configs/opkg/feeds.conf" .
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
