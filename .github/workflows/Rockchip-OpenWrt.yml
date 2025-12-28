@@ -9,6 +9,7 @@ env:
   REPO_URL: https://github.com/istoreos/istoreos
   REPO_BRANCH: istoreos-24.10
   CONFIG_FILE: configs/rockchip.config
+  GENERAL_CONFIG: configs/general.config
   FEEDS_CONF: configs/opkg/feeds.conf
   GIT_NAME: ${{ secrets.username }}
   GIT_PASSWORD: ${{ secrets.password }}
@@ -117,6 +118,7 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
+        cat $EXTRA_CONFIG >> $OPENWRT_PATH/.config
         chmod +x $GITHUB_WORKSPACE/scripts/*.sh
         chmod +x $DIY_SCRIPT
         cd $OPENWRT_PATH
