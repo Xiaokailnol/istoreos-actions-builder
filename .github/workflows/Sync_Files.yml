@@ -34,15 +34,15 @@ jobs:
     - name: Sync iStoreOS Files
       run: |
         if [ "${{ matrix.target }}" = "x86_64" ]; then
-          curl -L -o x86_64.config https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
-          sed -i '/^CONFIG_ALL_KMODS=y$/d' config.seed
-          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' config.seed
+          curl -L -o configs/x86_64.config https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
+          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/config.seed
+          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/config.seed
         elif [ "${{ matrix.target }}" = "aarch64_generic" ]; then
-          curl -L -o rockchip.config https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
-          sed -i '/^CONFIG_ALL_KMODS=y$/d' config.seed
-          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' config.seed
+          curl -L -o configs/rockchip.config https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
+          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/config.seed
+          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/config.seed
         fi
-          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
+          curl -L -o configs/feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
           
     - name: Git push
       continue-on-error: true
