@@ -9,6 +9,8 @@ env:
   REPO_URL: https://github.com/istoreos/istoreos
   REPO_BRANCH: istoreos-24.10
   CONFIG_FILE: configs/rockchip.config
+  GIT_NAME: ${{ secrets.username }}
+  GIT_PASSWORD: ${{ secrets.password }}
   DIY_SCRIPT: diy-script.sh
   CLASH_KERNEL: arm64
   CACHE_TOOLCHAIN: true
