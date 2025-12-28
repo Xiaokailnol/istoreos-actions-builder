@@ -34,17 +34,16 @@ jobs:
     - name: Sync iStoreOS Files
       run: |
         if [ "${{ matrix.target }}" = "x86_64" ]; then
-          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
-          curl -L -o config.seed https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
+          curl -L -o x86_64.config https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
           sed -i '/^CONFIG_ALL_KMODS=y$/d' config.seed
           sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' config.seed
         elif [ "${{ matrix.target }}" = "aarch64_generic" ]; then
-          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/r4se/feeds.conf
-          curl -L -o config.seed https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
+          curl -L -o rockchip.config https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
           sed -i '/^CONFIG_ALL_KMODS=y$/d' config.seed
           sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' config.seed
         fi
-
+          curl -L -o feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
+          
     - name: Git push
       continue-on-error: true
       run: |
@@ -52,4 +51,4 @@ jobs:
         [ -d .git ] && git init
         git add --all
         git commit -sm "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
-        git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:${{ matrix.target }}
+        git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:master
