@@ -1,4 +1,4 @@
-name: Rockchip OpenWrt
+name: Rockchip iStoreOS
 
 on:
   workflow_dispatch:
