@@ -30,11 +30,11 @@ jobs:
       run: |
           mkdir -p configs configs/opkg
           curl -L -o configs/x86_64.config https://fw0.koolcenter.com/iStoreOS/x86_64_efi/config.seed
-          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/config.seed
-          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/config.seed
+          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/x86_64.config
+          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/x86_64.config
           curl -L -o configs/rockchip.config https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
-          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/config.seed
-          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/config.seed
+          sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/rockchip.config
+          sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/rockchip.config
           curl -L -o configs/opkg/feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
           
     - name: Git push
