@@ -18,6 +18,7 @@ git clone --depth=1 -b 26.x https://"$GIT_NAME":"$GIT_PASSWORD"@gitea.kejizero.x
 git clone --depth=1 -b v5 https://github.com/sbwml/luci-app-mosdns package/new/luci-app-mosdns
 git clone --depth=1 -b main https://github.com/sbwml/luci-app-openlist2 package/new/openlist
 git clone --depth=1 -b main https://github.com/sirpdboy/luci-app-adguardhome package/new/luci-app-adguardhome
+git clone --depth=1 -b master https://"$GIT_NAME":"$GIT_PASSWORD"@gitea.kejizero.xyz/zhao/luci-app-ota package/new/luci-app-ota
 
 # 科学上网插件
 git clone --depth=1 -b master https://"$GIT_NAME":"$GIT_PASSWORD"@gitea.kejizero.xyz/zhao/openwrt_helloworld package/new/openwrt_helloworld
