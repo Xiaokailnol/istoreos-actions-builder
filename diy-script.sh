@@ -27,3 +27,8 @@ cp -f $GITHUB_WORKSPACE/images/bg1.jpg feeds/third/luci-theme-argon/htdocs/luci-
 
 # 修复 Rust 错误
 sed -i 's/--set=llvm\.download-ci-llvm=true \\/--set=llvm.download-ci-llvm=false \\/' feeds/packages/lang/rust/Makefile
+
+# 修正内核值
+curl -L -O https://downloads.openwrt.org/releases/24.10.4/targets/rockchip/armv8/profiles.json
+jq -r '.linux_kernel.vermagic' profiles.json >.vermagic
+sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic/' include/kernel-defaults.mk
