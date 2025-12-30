@@ -6,7 +6,7 @@ set -e
 # 定义变量
 BUILD_DATE=$(date +%s)
 OTA_DIR="ota"
-OTA_BASE_URL="https://github.com/Xiaokailnol/istoreos-actions-builder/releases/download"
+OTA_BASE_URL="https://gh-proxy.kejizero.xyz/https://github.com/Xiaokailnol/istoreos-actions-builder/releases/download"
 IMG_PATTERN="bin/targets/rockchip/armv8*/*-squashfs-sysupgrade.img.gz"
 JSON_FILE="${OTA_DIR}/rockchip.json"
 
