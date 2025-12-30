@@ -33,3 +33,8 @@ sed -i 's/--set=llvm\.download-ci-llvm=true \\/--set=llvm.download-ci-llvm=false
 curl -L -O https://downloads.openwrt.org/releases/24.10.4/targets/rockchip/armv8/profiles.json
 jq -r '.linux_kernel.vermagic' profiles.json >.vermagic
 sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic/' include/kernel-defaults.mk
+
+# OTA 在线更新
+CURRENT_DATE=$(date +%s)
+sed -i "/BUILD_DATE/d" package/base-files/files/usr/lib/os-release
+sed -i "/BUILD_ID/aBUILD_DATE=\"$CURRENT_DATE\"" package/base-files/files/usr/lib/os-release
