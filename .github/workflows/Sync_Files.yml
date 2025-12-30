@@ -35,6 +35,7 @@ jobs:
           curl -L -o configs/rockchip.config https://fw0.koolcenter.com/iStoreOS/r4se/config.seed
           sed -i '/^CONFIG_ALL_KMODS=y$/d' configs/rockchip.config
           sed -i '/^CONFIG_PACKAGE_luci-app-ota=y$/d;/^CONFIG_PACKAGE_luci-i18n-ota-zh-cn=y$/d' configs/rockchip.config
+          sed -i -E '/^CONFIG_TARGET_DEVICE_rockchip_armv8_DEVICE_.*=y$/ {/DEVICE_friendlyarm_nanopi-r4se=y/! s/^CONFIG_(.*)=y$/# CONFIG_\1 is not set/}' configs/rockchip.config
           curl -L -o configs/opkg/feeds.conf https://fw0.koolcenter.com/iStoreOS/x86_64_efi/feeds.conf
           
     - name: Git push
