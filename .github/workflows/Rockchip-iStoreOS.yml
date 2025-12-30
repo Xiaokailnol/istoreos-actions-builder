@@ -2,8 +2,10 @@ name: Rockchip iStoreOS
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 4 * * 1
+  workflow_run:
+    workflows: ["Sync iStoreOS Files"]
+    types:
+      - completed
 
 env:
   REPO_URL: https://github.com/istoreos/istoreos
