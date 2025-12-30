@@ -4,7 +4,6 @@
 set -e
 
 # 定义变量
-BUILD_DATE=$(date +%s)
 OTA_DIR="ota"
 OTA_BASE_URL="https://gh-proxy.kejizero.xyz/https://github.com/Xiaokailnol/istoreos-actions-builder/releases/download"
 IMG_PATTERN="bin/targets/rockchip/armv8*/*-squashfs-sysupgrade.img.gz"
@@ -26,7 +25,7 @@ cat > "$JSON_FILE" <<EOF
 {
   "friendlyarm,nanopi-r4se": [
     {
-      "build_date": "$BUILD_DATE",
+      "build_date": "$CURRENT_DATE",
       "sha256sum": "$SHA256",
       "url": "$OTA_BASE_URL/Rockchip/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz"
     }
