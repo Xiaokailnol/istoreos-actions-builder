@@ -2,8 +2,8 @@ name: Sync iStoreOS Files
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [sync]
+  schedule:
+    - cron: 0 4 * * 1
 
 jobs:
   build:
