@@ -28,7 +28,7 @@ cat > "$JSON_FILE" <<EOF
     {
       "build_date": "$BUILD_DATE",
       "sha256sum": "$SHA256",
-      "url": "$OTA_BASE_URL/Rockchip/istoreos-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz"
+      "url": "$OTA_BASE_URL/Rockchip/istoreos-rockchip-armv8-friendlyarm_nanopi-r4se-squashfs-sysupgrade.img.gz"
     }
   ]
 }
