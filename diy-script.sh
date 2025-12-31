@@ -6,7 +6,7 @@ sed -i 's/192.168.100.1/10.0.0.1/g' package/istoreos-files/Makefile
 # TTYD 免登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
-sed -i 's/iStoreOS/ZeroWrt/g''s/iStoreOS/Z/g'''ss package/istoreos-files/files/e
+sed -i 's/iStoreOS/ZeroWrt/g' package/istoreos-files/files/etc/board.d/10_system
 
 # 移除要替换的包
 rm -rf feeds/packages/lang/golang
