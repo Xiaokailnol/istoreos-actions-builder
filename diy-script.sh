@@ -37,3 +37,6 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 # OTA 在线更新
 sed -i "/BUILD_DATE/d" package/base-files/files/usr/lib/os-release
 sed -i "/BUILD_ID/aBUILD_DATE=\"$CURRENT_DATE\"" package/base-files/files/usr/lib/os-release
+
+./scripts/feeds update -a
+./scripts/feeds install -a
