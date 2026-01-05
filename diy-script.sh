@@ -41,5 +41,15 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 sed -i "/BUILD_DATE/d" package/base-files/files/usr/lib/os-release
 sed -i "/BUILD_ID/aBUILD_DATE=\"$CURRENT_DATE\"" package/base-files/files/usr/lib/os-release
 
+# emmc-install
+mkdir -p files/sbin
+cp -f $GITHUB_WORKSPACE/scripts/emmc-install files/sbin/emmc-install
+chmod 755 files/sbin/emmc-install
+
+# 修改版本
+sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='ZeroWrt-$(date +%Y%m%d)'/g"  package/base-files/files/etc/openwrt_release
+sed -i "s/DISTRIB_REVISION='*.*'/DISTRIB_REVISION=' By Xiaokailnol'/g" package/base-files/files/etc/openwrt_release
+sed -i "s|^OPENWRT_RELEASE=\".*\"|OPENWRT_RELEASE=\"ZeroWrt 标准版 @R$(date +%Y%m%d) BY Xiaokailnol\"|" package/base-files/files/usr/lib/os-release
+
 ./scripts/feeds update -a
 ./scripts/feeds install -a
